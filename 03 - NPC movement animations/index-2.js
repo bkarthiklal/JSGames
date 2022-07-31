@@ -11,10 +11,10 @@ let gameFrame = 0;
 class Enemy {
   constructor(path) { 
     this.image = new Image();
-    this.image.src = './images/enemy2.png';
+    this.image.src = './images/enemy3.png';
     this.speed = Math.random() * 4 + 1;
-    this.spriteWidth = 266;
-    this.spriteHeight = 188;
+    this.spriteWidth = 218;
+    this.spriteHeight = 177;
     this.width = this.spriteWidth / 2.5;
     this.height = this.spriteHeight / 2.5;
     this.x = Math.random() * (canvas.width - this.width);
@@ -24,12 +24,15 @@ class Enemy {
     this.flapSpeed = Math.floor(Math.random() * 3 + 1);
     this.angle = 0;
     // this.angle = Math.random() * 2;
-    this.angleSpeed = Math.random() * 0.2;
-    this.curve  = Math.random() * 7;
+    this.angleSpeed = Math.random() * 2;
+    this.curve  = Math.random() * 200;
   }
   update() {
-    this.x -= this.speed;
-    this.y += this.curve * Math.sin(this.angle);
+    this.x = this.curve * Math.sin(this.angle * Math.PI / 180) +
+      (canvas.width / 2 - this.width/2)
+    this.y = this.curve * Math.cos(this.angle * Math.PI / 180) +
+      (canvas.height / 2 - this.height/2)
+    // this.y += this.curve * Math.sin(this.angle);
     this.angle += this.angleSpeed;
     if (this.x + this.width < 0) {
       this.x = canvas.width;
