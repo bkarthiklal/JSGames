@@ -22,15 +22,19 @@ class Enemy {
 
     this.frame = 0;
     this.flapSpeed = Math.floor(Math.random() * 3 + 1);
-    this.angle = 0;
+    this.angle = 0; // Where in path the anim char appear at first 
     // this.angle = Math.random() * 2;
-    this.angleSpeed = Math.random() * 2;
-    this.curve  = Math.random() * 200;
+    this.angleSpeed = Math.random() * 1.5 + 0.5;
+    this.curve = Math.random() * 200 + 50;
+    
+    /**
+     * Play with (Math.PI / 'x'), x  to change the angle of the enemy
+     */
   }
   update() {
-    this.x = this.curve * Math.sin(this.angle * Math.PI / 180) +
+    this.x = canvas.width/2 * Math.sin(this.angle * Math.PI / 90) +
       (canvas.width / 2 - this.width/2)
-    this.y = this.curve * Math.cos(this.angle * Math.PI / 180) +
+    this.y = canvas.height/2 * Math.cos(this.angle * Math.PI / 360) +
       (canvas.height / 2 - this.height/2)
     // this.y += this.curve * Math.sin(this.angle);
     this.angle += this.angleSpeed;
