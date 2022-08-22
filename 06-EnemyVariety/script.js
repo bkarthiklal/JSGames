@@ -12,6 +12,7 @@ window.addEventListener('load', function () {
       this.enemies = [];
       this.enemyInterval = 1000;
       this.enemyTimer = 0;
+      this.enemyTypes = ['worm', 'ghost']
     }
     update(deltaTime) {
       /** Delta time is to ensure same speed of rendering on
@@ -33,7 +34,12 @@ window.addEventListener('load', function () {
     }
     /** Private method */
     #addNewEnemy() {
-      this.enemies.push(new Worm(this));
+      const randomEnemy = this.enemyTypes[Math.floor(Math.random() * this.enemies.length)]
+      if (randomEnemy === 'ghost') {
+        this.enemies.push(new Ghost(this));
+      } else if (randomEnemy === 'worm') {
+        this.enemies.push(new Worm(this));
+      }
       /** Sorts to ensure elements higher in the y axis are drawn
        * behind elements lower in the y axis
        */
@@ -77,8 +83,31 @@ window.addEventListener('load', function () {
       this.height = this.spriteHeight/2;
       this.x = this.game.width;
       this.y = this.game.height * Math.random();
+      /** In Html, an element (image) with an id, is automatically mapped to that id word 
+       * Hence 'worm' image with id="worm", get assigned to "worm" keyword below
+      */
       this.image = worm;
       this.vx = Math.random() * 0.1 + 0.1;
+    }
+  }
+
+  class Ghost extends Enemy {
+    constructor(game) {
+      /** Super used to call parent constructor
+       * call super before using this object 
+       */
+      super(game);
+      this.spriteWidth = 261;
+      this.spriteHeight = 209;
+      this.width = this.spriteWidth/2;
+      this.height = this.spriteHeight/2;
+      this.x = this.game.width;
+      this.y = this.game.height * Math.random();
+      /** In Html, an element (image) with an id, is automatically mapped to that id word 
+       * Hence 'ghost' image with id="ghost", get assigned to "ghost" keyword below
+      */
+      this.image = ghost;
+      this.vx = Math.random() * 0.1 + 0.3;
     }
   }
 
