@@ -55,17 +55,29 @@ window.addEventListener('load', function () {
     constructor(game) {
       this.game = game;
       this.markedForDeletion = false;
+      this.frameX = 0;
+      this.maxFrame = 5;
+      this.frameInterval = 100;
+      this.frameTimer = 0;
     }
     update(deltaTime) {
       this.x -= this.vx * deltaTime;
       if (this.x < 0 - this.width) {
         this.markedForDeletion = true;
       }
+
+      if (this.frameTimer > this.frameInterval) {
+        if (this.frameX < this.maxFrame) this.frameX++;
+        else this.frameX = 0;
+        this.frameTimer = 0;
+      } else {
+        this.frameTimer += deltaTime;
+      }
     }
-    draw() {
-      this.game.ctx.drawImage(
+    draw(ctx) {
+      ctx.drawImage(
         this.image, /** Image src */
-        0, 
+        this.frameX * this.spriteWidth, 
         0,
         this.spriteWidth,
         this.spriteHeight,
