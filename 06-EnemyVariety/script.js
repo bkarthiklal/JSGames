@@ -153,12 +153,14 @@ window.addEventListener('load', function () {
       */
       this.image = spider;
       this.vx = 0;
-      this.vy = 1;
+      /** Random num b/w 0.1 and 0.2 :  Added random vertical speed */
+      this.vy = Math.random() * 0.1 + 0.1;
       this.maxLength = Math.random() * this.game.height;
     }
     update(deltaTime) {
       super.update(deltaTime);
-      this.y += this.vy;
+      /** deltaTime multiplied to have consistent speed on different machine */
+      this.y += this.vy * deltaTime;
       if (this.y > this.maxLength) {
         this.vy += -1;
       }
