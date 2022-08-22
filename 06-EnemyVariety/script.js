@@ -34,6 +34,12 @@ window.addEventListener('load', function () {
     /** Private method */
     #addNewEnemy() {
       this.enemies.push(new Worm(this));
+      /** Sorts to ensure elements higher in the y axis are drawn
+       * behind elements lower in the y axis
+       */
+      this.enemies.sort((a, b) => {
+        return a.y - b.y;
+      })
     }
   }
 
