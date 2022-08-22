@@ -30,7 +30,7 @@ window.addEventListener('load', function () {
       this.enemies.forEach(enemy => enemy.update(deltaTime));
     }
     draw() {
-      this.enemies.forEach(enemy => enemy.draw());
+      this.enemies.forEach(enemy => enemy.draw(this.ctx));
     }
     /** Private method */
     #addNewEnemy() {
@@ -115,7 +115,7 @@ window.addEventListener('load', function () {
       this.angle = 0;
       this.curve = Math.random() * 3;
     }
-    draw() {
+    draw(ctx) {
       /** Save global Values of ctx before modifying */
       ctx.save();
 
@@ -164,6 +164,13 @@ window.addEventListener('load', function () {
       if (this.y > this.maxLength) {
         this.vy += -1;
       }
+    }
+    draw(ctx) {
+      ctx.beginPath();
+      ctx.moveTo(this.x + this.width/2, 0);
+      ctx.lineTo(this.x + this.width/2, this.y + 10);
+      ctx.stroke();
+      super.draw(ctx);
     }
   }
 
