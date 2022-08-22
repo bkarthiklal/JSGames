@@ -10,7 +10,7 @@ window.addEventListener('load', function () {
       this.width = width;
       this.height = height;
       this.enemies = [];
-      this.enemyInterval = 1000;
+      this.enemyInterval = 500;
       this.enemyTimer = 0;
       this.enemyTypes = ['worm', 'ghost']
     }
@@ -110,6 +110,8 @@ window.addEventListener('load', function () {
       */
       this.image = ghost;
       this.vx = Math.random() * 0.1 + 0.3;
+      this.angle = 0;
+      this.curve = Math.random() * 3;
     }
     draw() {
       /** Save global Values of ctx before modifying */
@@ -122,7 +124,11 @@ window.addEventListener('load', function () {
 
       /** Restore ctx values to the state before altering them */
       ctx.restore();
-
+    }
+    update(deltaTime) {
+      super.update(deltaTime);
+      this.y += Math.sin(this.angle) * this.curve;
+      this.angle += 0.04;
     }
   }
 
