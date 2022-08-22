@@ -112,12 +112,17 @@ window.addEventListener('load', function () {
       this.vx = Math.random() * 0.1 + 0.3;
     }
     draw() {
-      /** Get opacity of asset to 50% */
-      ctx.globalAlpha = 0.5;
+      /** Save global Values of ctx before modifying */
+      ctx.save();
+
+      /** Set opacity of asset to 50% */
+      ctx.globalAlpha = 0.7;
       /** Calling draw method of the parent (Enemy) class */
-      super.draw(ctx)
-      /** Reset opacity to 1, so that it doesn't affect other assets */
-      ctx.globalAlpha = 1;
+      super.draw(ctx);
+
+      /** Restore ctx values to the state before altering them */
+      ctx.restore();
+
     }
   }
 
