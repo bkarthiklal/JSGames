@@ -103,8 +103,8 @@ window.addEventListener('load', function () {
       this.width = this.spriteWidth/2;
       this.height = this.spriteHeight/2;
       this.x = this.game.width;
-      /** 0.8 to restrict the asset render to 80% of height from top */
-      this.y = this.game.height * Math.random() * 0.8;
+      /** 0.8 to restrict the asset render to 60% of height from top */
+      this.y = this.game.height * Math.random() * 0.6;
       /** In Html, an element (image) with an id, is automatically mapped to that id word 
        * Hence 'ghost' image with id="ghost", get assigned to "ghost" keyword below
       */
