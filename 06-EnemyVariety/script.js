@@ -10,9 +10,9 @@ window.addEventListener('load', function () {
       this.width = width;
       this.height = height;
       this.enemies = [];
-      this.enemyInterval = 500;
+      this.enemyInterval = 250;
       this.enemyTimer = 0;
-      this.enemyTypes = ['worm', 'ghost']
+      this.enemyTypes = ['worm', 'ghost', 'spider']
     }
     update(deltaTime) {
       /** Delta time is to ensure same speed of rendering on
@@ -34,18 +34,20 @@ window.addEventListener('load', function () {
     }
     /** Private method */
     #addNewEnemy() {
-      const randomEnemy = this.enemyTypes[Math.floor(Math.random() * this.enemies.length)]
+      const randomEnemy = this.enemyTypes[Math.floor(Math.random() * this.enemyTypes.length)]
       if (randomEnemy === 'ghost') {
         this.enemies.push(new Ghost(this));
       } else if (randomEnemy === 'worm') {
         this.enemies.push(new Worm(this));
+      } else if (randomEnemy === 'spider') {
+        this.enemies.push(new Spider(this));
       }
       /** Sorts to ensure elements higher in the y axis are drawn
        * behind elements lower in the y axis
        */
-      this.enemies.sort((a, b) => {
-        return a.y - b.y;
-      })
+      // this.enemies.sort((a, b) => {
+      //   return a.y - b.y;
+      // })
     }
   }
 
@@ -132,6 +134,32 @@ window.addEventListener('load', function () {
     }
   }
 
+  class Spider extends Enemy {
+    constructor(game) {
+      /** Super used to call parent constructor
+       * call super before using this object 
+       */
+      super(game);
+      this.spriteWidth = 310;
+      this.spriteHeight = 175;
+      this.width = this.spriteWidth/2;
+      this.height = this.spriteHeight / 2;
+      /** Render Spiders anywhere between 0 and game width */
+      this.x = Math.random() * this.game.width;
+      /** 0- : To set the assets to start from just behind the top area */
+      this.y = 0 - this.height;
+      /** In Html, an element (image) with an id, is automatically mapped to that id word 
+       * Hence 'spider' image with id="spider", get assigned to "spider" keyword below
+      */
+      this.image = spider;
+      this.vx = 0;
+      this.vy = 1;
+    }
+    update(deltaTime) {
+      super.update(deltaTime);
+      this.y += this.vy;
+    }
+  }
 
   const game = new Game(ctx, canvas.width, canvas.height);
   let lastTime = 1;
