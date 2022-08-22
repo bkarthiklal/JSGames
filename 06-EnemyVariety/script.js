@@ -82,7 +82,8 @@ window.addEventListener('load', function () {
       this.width = this.spriteWidth/2;
       this.height = this.spriteHeight/2;
       this.x = this.game.width;
-      this.y = this.game.height * Math.random();
+      /** -height to make the assets(worms), stick to the ground */
+      this.y = this.game.height -this.height;
       /** In Html, an element (image) with an id, is automatically mapped to that id word 
        * Hence 'worm' image with id="worm", get assigned to "worm" keyword below
       */
@@ -102,7 +103,8 @@ window.addEventListener('load', function () {
       this.width = this.spriteWidth/2;
       this.height = this.spriteHeight/2;
       this.x = this.game.width;
-      this.y = this.game.height * Math.random();
+      /** 0.8 to restrict the asset render to 80% of height from top */
+      this.y = this.game.height * Math.random() * 0.8;
       /** In Html, an element (image) with an id, is automatically mapped to that id word 
        * Hence 'ghost' image with id="ghost", get assigned to "ghost" keyword below
       */
