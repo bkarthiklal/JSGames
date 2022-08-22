@@ -171,6 +171,8 @@ window.addEventListener('load', function () {
     }
     update(deltaTime) {
       super.update(deltaTime);
+      /** Add different condition of deletion as spiders move vertically */
+      if (this.y < 0 - this.height * 2) this.markedForDeletion = true;
       /** deltaTime multiplied to have consistent speed on different machine */
       this.y += this.vy * deltaTime;
       if (this.y > this.maxLength) {
